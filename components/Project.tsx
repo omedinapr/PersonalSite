@@ -1,5 +1,6 @@
-import ShipLeap from '../assets/images/projects/ShipLeap.png'
+import { useInView } from 'framer-motion'
 import Image, { StaticImageData } from 'next/image'
+import { useRef } from 'react'
 
 
 export interface IProjectProps {
@@ -11,9 +12,19 @@ export interface IProjectProps {
 }
 
 const Project = (props: IProjectProps) => {
+    const projectRef = useRef(null);
+    const isInView = useInView(projectRef, { once: true });
 
     return (
-        <div className="flex items-start mb-32">
+        <div
+            ref={projectRef}
+            style={{
+                transform: isInView ? "none" : "translateX(-200px)",
+                opacity: isInView ? 1 : 0,
+                transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
+            }}
+            className="flex items-start mb-32"
+        >
             <div className="z-20 w-1/3 text-right">
                 {/* Project Title */}
                 <div className="text-4xl font-semibold uppercase">{props.title}</div>
@@ -39,7 +50,7 @@ const Project = (props: IProjectProps) => {
             </div>
             <div className='z-10 w-2/3 ml-8'>
                 {/* Project Image */}
-                <Image layout={"responsive"} src={props.image} width={1420} height={458} />
+                <Image layout={"responsive"} src={props.image} width={1420} height={458} alt={`Project ${props.title}`} />
 
                 {/* Project Screenshots */}
                 {/* <div className='flex items-center justify-end mt-4'>
