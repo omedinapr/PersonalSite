@@ -15,7 +15,8 @@ import SocialLinkedIn from '../assets/images/socials/linkedin.svg'
 import SocialTwitter from '../assets/images/socials/twitter.svg'
 
 import { AnimationControls, motion, TargetAndTransition, Transition, useInView, useScroll, VariantLabels } from "framer-motion";
-import { useRef, useState } from 'react'
+import { useState } from 'react'
+import Head from 'next/head'
 
 const Home: NextPage = () => {
   const { scrollYProgress } = useScroll();
@@ -49,6 +50,13 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Oscar Medina - Personal website</title>
+        <meta name="description" content="Oscar Medina developer by day and developer by night, based out of New Jersey." />
+        <meta httpEquiv="content-language" content="en-us"></meta>
+        <meta name="theme-color" content="#EF4553"></meta>
+        <link rel='canonical' href='/' />
+      </Head>
       <motion.div
         style={{
           position: "fixed",
@@ -63,27 +71,26 @@ const Home: NextPage = () => {
         }}
       />
       <section className='w-full h-full text-medina-black'>
+        <h1 className='hidden'>OMedina - Full Stack Developer</h1>
         {/* Big O */}
         <motion.div
-          initial={{
-            opacity: 0
-          }}
           animate={bigOAnimation}
           transition={bigOTransition}
           onAnimationComplete={() => {
-            console.log("FINISHEDDDDDDDDDDD");
             setBigOAnimation({
-              opacity: [0.5, 0.5, 0.5],
               rotate: [0, 2, 0],
             });
             setBigOTransition({
-              delay: 3,
+              delay: 1,
               repeat: Infinity,
               ease: 'easeInOut',
-              duration: 4
+              duration: 3
             })
           }}
-          className='w-3/4 absolute top-[30%] -left-[30%] -z-10 opacity-20'
+          style={{
+            opacity: 0.5
+          }}
+          className='absolute w-[180%] top-[40%] -left-[110%] md:w-3/4 md:top-[30%] md:-left-[30%] -z-10'
         >
           <Image layout='responsive' priority={false} src={BigO} placeholder={"blur"} width={1410.63} height={1410.63} alt="Big O background" />
         </motion.div>
@@ -92,7 +99,7 @@ const Home: NextPage = () => {
         <div className='flex items-center justify-around w-full h-full p-8'>
 
           {/* Logo & Menu */}
-          <div className='flex flex-col w-[400px] p-8 items-center -mt-[15%]'>
+          <div className='flex flex-col w-[400px] p-8 items-center -mt-[50%]  md:-mt-[15%]'>
 
             <div className='flex items-center justify-around w-full'>
               <motion.img
@@ -171,13 +178,13 @@ const Home: NextPage = () => {
               delay: 3,
               duration: 2
             }}
-            className='absolute bottom-10 right-0 w-[40%]'
+            className='absolute bottom-10 sm:right-10 right-0 px-8 sm:pl-8 sm:pr-0 w-[100%] sm:w-[90%] lg:pl-0 lg:w-[75%] xl:w-[50%] 2xl:w-[40%]'
           >
-            <div className="flex items-end w-full">
-              <div className='w-1/3'>
+            <div className="flex items-end justify-end w-full">
+              <div className='w-1/3 max-w-[200px] hidden sm:block'>
                 <Image src={Me} width={243.85} height={250.4} layout={"responsive"} alt="Drawing of OMedina" />
               </div>
-              <div className='w-2/3 p-6 pl-12 mt-8 -ml-8 text-white rounded-xl bg-medina-red'>
+              <div className='w-full p-6 mt-8  sm:w-2/3 sm:pl-12 sm:-ml-8 text-white rounded-xl bg-medina-red'>
                 <h2 className='font-bold text-[28px]'>Hello, I&apos;m Oscar Medina</h2>
                 <p className='text-lg'>developer by
                   <motion.span
@@ -213,8 +220,10 @@ const Home: NextPage = () => {
       {/* Work Container */}
       <section className='w-full text-medina-black'>
         {/* O's Pattern Background */}
-        <div className='absolute w-full -z-20'>
-          <Image layout='responsive' src={OPattern} width={3840} height={936} alt="Big Os pattern" />
+        <div className='absolute w-full overflow-hidden -z-20'>
+          <div className='w-[400%] sm:w-[200%] lg:w-full'>
+            <Image layout="responsive" src={OPattern} width={3840} height={936} alt="Big Os pattern" />
+          </div>
         </div>
 
         {/* Start */}
@@ -243,8 +252,10 @@ const Home: NextPage = () => {
         </div>
 
         {/* O's Pattern Background */}
-        <div className='absolute bottom-0 w-full -z-20'>
-          <Image className='rotate-180' layout='responsive' src={OPattern} width={3840} height={936} alt="Big Os pattern" />
+        <div className='absolute w-full bottom-0 overflow-hidden -z-20'>
+          <div className='w-[400%] sm:w-[200%] lg:w-full'>
+            <Image className='rotate-180' layout='responsive' src={OPattern} width={3840} height={936} alt="Big Os pattern" />
+          </div>
         </div>
 
         {/* Contact Container */}
@@ -256,7 +267,7 @@ const Home: NextPage = () => {
               <Image src={SocialLinkedIn} width={43.22} height={43.22} alt="LinkedIn" />
               <Image src={SocialTwitter} width={52.82} height={42.91} alt="Twitter" />
             </div>
-            <p className='text-[52px] font-bold text-medina-red text-center'>hello@omedina.me</p>
+            <p className='text-[8vw] sm:text-[5vw] md:text-[4vw] lg:text-[2.5vw] font-bold text-medina-red text-center'>hello@omedina.me</p>
           </div>
         </div>
       </section>
